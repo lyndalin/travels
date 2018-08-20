@@ -1,0 +1,141 @@
+---
+title: "Code for creating maps using the leaflet R package"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Install packages
+
+```{r }
+library(leaflet)
+library(htmltools)
+library(htmlwidgets)
+```
+
+###Map 1 (Cities visited around the world ) ###
+
+```{r}
+# Read in data
+cities_visited_world <- read.csv("data/cities_visited_world.csv")
+
+# First create color palette so that cities are colored differently depending on the continent
+# "forestgreen"= #228B22
+# "slateblue"= #6A5ACD
+# "red"= #FF0000
+# "orange"= #FFA500
+# "steelblue"= #4682B4
+                   
+pal <- colorFactor(palette = c("#228B22", "#6A5ACD", "#FF0000", "#FFA500", "#4682B4"), 
+                   domain = cities_visited_world$continent)
+
+# Customize labels for each data point
+labels = paste(cities_visited_world$city, "<br/>", cities_visited_world$country) %>% lapply(htmltools::HTML)
+
+# Create map
+cities_visited_world_map <- leaflet(cities_visited_world) %>%
+  addProviderTiles("OpenStreetMap") %>%
+  addCircleMarkers(lng=~lon, lat=~lat, 
+                   popup = ~city, 
+                   label=labels,
+                   color = ~pal(continent), 
+                   radius=3, 
+                   stroke=TRUE, fillOpacity=0.5)
+cities_visited_world_map
+```
+
+Sometimes when there are many data points, it's good to create clusters. You can do this using the clusterOptions as shown here:
+
+```{r}
+# Create map with cluster circles
+cities_visited_world_map_cluster <- leaflet(cities_visited_world) %>%
+  addTiles() %>%
+  addCircleMarkers(lng=~lon, lat=~lat, 
+                   popup = ~city, #City label from the dataset shows when clicking on a city
+                   label=labels, #Customized label shows when mouse is over the city (but not clicked)
+                   color = ~pal(continent), 
+                   radius=3, 
+                   stroke=TRUE, fillOpacity=0.5, 
+                   clusterOptions = markerClusterOptions()) #Add clusters
+cities_visited_world_map_cluster
+
+```
+
+Finally, you can save the map as a widget that you can upload to a website. The following code will create an .html file in your current directory
+
+```{r eval=FALSE}
+saveWidget(cities_visited_world_map, file="cities_visited_world_map.html")
+```
+
+### MAP 2 (USA States visited) ###
+
+```{r}
+# Read in data
+states_visited_usa <- read.csv("data/states_visited_usa.csv")
+```
+
+Get polygons for US States. There are multiple ways to do this. For example:
+
+```{r results="hide", message=FALSE}
+
+# 1 - Using the tigris package
+library(tigris)
+us_states <- states(cb=TRUE, resolution="20m") 
+
+# 2 - From a shape file downloaded from census.gov and reading it using the rgdal package
+# See: https://rstudio.github.io/leaflet/shapes.html
+# From https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html
+library(rgdal)
+us_states <- readOGR("./shp/cb_2017_us_state_20m.shp",
+                  layer = "cb_2017_us_state_20m", GDAL1_integer64_policy = TRUE)
+```
+
+Once you have the shape file with the US states, merge this file with the states_visited_usa data frame that shows whether you visited or not a state (1=Visited, 0=Haven't visited)
+
+```{r}
+
+# Merge US states polygon data with data frame indicating the states visited/not visited
+states_merged <- geo_join(us_states, states_visited_usa, "NAME", "state") #geo_join is from the tigris package
+
+# Choose colors for states visited / not visited
+visited_color_1 <- "#0000CD" #Blue-ish color
+not_visited_color_0 <- "#66CD00" #Green-ish color
+
+# Other colors used for the map:
+# #000000 BLACK
+# #BEBEBE GRAY
+
+# Indicate which colors will be used for the states visited / not visited
+mypalette <- colorNumeric(c(not_visited_color_0, visited_color_1), c(0,1), na.color="transparent") # (or convert the $visited column to factor and use colorFactor instead of colorNumeric)
+#mypalette(c(0,1)) #Colors chosen for values 0 and 1
+
+# Create map
+us_states_visited_map <- leaflet(states_merged) %>% 
+  addTiles() %>% 
+  setView(lat=39.83, lng=-98.58, zoom=4) %>%
+  addPolygons(weight=1, smoothFactor=0.2, color = "#BEBEBE", fill=FALSE) %>% 
+  addPolygons(weight=0.5, 
+              smoothFactor = 0.5,
+              color=~mypalette(visited),
+              fillColor = ~mypalette(visited), 
+              opacity = 0.5,
+              fillOpacity = 0.4, 
+              stroke=TRUE, 
+              label = ~state, #Show state label when mouse is on the state
+              highlightOptions = highlightOptions(color="#000000", weight=3, bringToFront=TRUE)) %>% #highlights moused-over polygon
+  addLegend(data=states_merged, colors=c("#66CD00", "#0000CD"), labels=c("Have not visited", "Visited"), opacity=0.4, title="States visited", position="bottomleft")
+us_states_visited_map
+
+```
+Save the map as an .html widget that you can use to upload to a website
+
+```{r eval=FALSE}
+saveWidget(us_states_visited_map, file="cities_visited_world_map.html")
+```
+
+For more information, see [Leaflet for R](https://rstudio.github.io/leaflet/)
+
+
+
