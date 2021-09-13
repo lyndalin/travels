@@ -49,6 +49,7 @@ Baltimore,USA,North America,1,39.290386,-76.61219
 Bayfield,USA,North America,1,46.81225,-90.82217
 Berkeley,USA,North America,1,37.871593,-122.272747
 Boston,USA,North America,1,42.360082,-71.05888
+Bozeman,USA,North America,1,45.6794293,-111.044047
 Chapel Hill,USA,North America,1,35.9132,-79.0558
 Charleston,USA,North America,1,32.79039,-79.93814
 Charlotte,USA,North America,1,35.2271,-80.8431
@@ -56,11 +57,15 @@ Chicago,USA,North America,1,41.878114,-87.629798
 Cincinnati,USA,North America,1,39.1031,-84.512
 Cleveland,USA,North America,1,41.4993,-81.6944
 Denver,USA,North America,1,39.739236,-104.990251
+Des Moines,USA,North America,1,41.5910323,-93.6046655
 Detroit,USA,North America,1,42.331427,-83.045754
 Green Bay,USA,North America,1,44.519159,-88.019826
 Honolulu,USA,North America,1,21.306944,-157.858333
+Hood River,USA,North America,1,45.705399,-121.521461
 Indianapolis,USA,North America,1,39.7684,-86.1581
 Jamestown,USA,North America,1,37.208268,-76.77409
+Key West,USA,North America,1,24.5625566,-81.7724368
+Lake Geneva,USA,North America,1,42.5929451,-88.43203735
 Las Vegas,USA,North America,1,36.1699,-115.1398
 Los Angeles,USA,North America,1,34.0522,-118.2437
 Louisville,USA,North America,1,38.2527,-85.7585
@@ -72,18 +77,24 @@ Milwaukee,USA,North America,1,43.0389,-87.9065
 Minneapolis,USA,North America,1,44.97749,-93.26437
 Monterey,USA,North America,1,36.6002,-121.8947
 Nashville,USA,North America,1,36.1627,-86.7816
+New Haven,USA,North America,1,41.30701828,-72.92308807
 New Orleans,USA,North America,1,29.9511,-90.0715
 New York City,USA,North America,1,40.7128,-74.0059
 Oakland,USA,North America,1,37.804364,-122.271114
+Omaha,USA,North America,1,41.258652,-95.937187
 Orlando,USA,North America,1,28.5383,-81.3792
 Philadelphia,USA,North America,1,39.9526,-75.1652
 Pittsburgh,USA,North America,1,40.4406,-79.9959
+Portland,USA,North America,1,45.51223,-122.658722
 Richmond,USA,North America,1,37.540725,-77.436048
 Saint Louis,USA,North America,1,38.627,-90.1994
 San Antonio,USA,North America,1,29.4241219,-98.4936282
 San Francisco,USA,North America,1,37.774929,-122.419416
 San Jose,USA,North America,1,37.338208,-121.886329
+Seattle,USA,North America,1,47.60323,-122.330276
+Sioux Falls,USA,North America,1,43.54731,-96.7313
 Springfield,USA,North America,1,39.781721,-89.650148
+Spokane,USA,North America,1,47.659,-117.42502
 Urbana-Champaign,USA,North America,1,40.1106,-88.2073
 Washington D.C.,USA,North America,1,38.9072,-77.0369
 Williamsburg,USA,North America,1,37.270702,-76.707457

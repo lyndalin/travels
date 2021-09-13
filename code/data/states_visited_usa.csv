@@ -5,12 +5,12 @@ Arkansas,0
 Arizona,0
 California,1
 Colorado,1
-Connecticut,0
+Connecticut,1
 Delaware,0
 Florida,1
 Georgia,1
 Hawaii,1
-Iowa,0
+Iowa,1
 Idaho,0
 Illinois,1
 Indiana,1
@@ -24,10 +24,10 @@ Michigan,1
 Minnesota,1
 Missouri,1
 Mississippi,0
-Montana,0
+Montana,1
 North Carolina,1
 North Dakota,0
-Nebraska,0
+Nebraska,1
 New Hampshire,0
 New Jersey,1
 New Mexico,1
@@ -35,17 +35,17 @@ Nevada,1
 New York,1
 Ohio,1
 Oklahoma,0
-Oregon,0
+Oregon,1
 Pennsylvania,1
 Rhode Island,0
 South Carolina,1
-South Dakota,0
+South Dakota,1
 Tennessee,1
 Texas,1
 Utah,0
 Virginia,1
 Vermont,0
-Washington,0
+Washington,1
 Wisconsin,1
 West Virginia,0
-Wyoming,0
+Wyoming,1
